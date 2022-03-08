@@ -1,0 +1,64 @@
+﻿@model IEnumerable<VideoRental.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Customers</h1>
+
+@Html.ActionLink("New Customer", "CustomerForm", "Customers", new { @class = "btn btn-primary" })
+
+<br />
+<br />
+
+
+<table id="mainCustomerTable" class="table">
+    <thead>
+        <tr>
+            <th>Names</th>
+            <th>Membership Types</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
+                <td>@customer.MembershipType.Name</td>
+                <td><button data-customer-id="@customer.Id" class="delBtn btn btn-danger">Delete</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts
+{
+    <script>
+
+        $("#mainCustomerTable .delBtn").on("click", function () {
+            let delBtn = $(this);
+
+            bootbox.confirm("Are You Sure You Want To Delete The Customer?", function (result) {
+
+                if (result) {
+                    $.ajax({
+                        url: "/api/customers/" + delBtn.attr("data-customer-id"),
+                        method: "DELETE",
+                        success: function () {
+                            console.log("fired");
+                            delBtn.parents("tr").remove();
+                        }
+                    })
+                }
+            });
+
+
+                
+
+        });
+
+
+            
+    </script>
+}

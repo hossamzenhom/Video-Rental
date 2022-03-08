@@ -1,0 +1,30 @@
+﻿@model IEnumerable<VideoRental.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Movies</h2>
+
+
+<br />
+<br />
+
+<table id="mainMovieTable" class="table">
+    <thead>
+        <tr>
+            <th>Movies names</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Name</td>
+                <td>@movie.Genre.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,56 @@
+﻿@model VideoRental.Models.ViewModels.ViewModelCustomersForms
+@{
+    ViewBag.Title = "New";
+}
+
+@if (Model.Customer == null || Model.Customer.Id == 0)
+{
+    <h2>New Customer</h2>
+}
+else
+{
+    <h2>Edit Customer</h2>
+}
+
+
+
+<br />
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    @Html.ValidationSummary(true, "Please Fix The Following Errors.");
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.Name)
+        @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.Name)
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.BirthDate)
+        @Html.TextBoxFor(c => c.Customer.BirthDate, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.MembershipTypeId)
+        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.Memberships, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
+
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(c => c.Customer.IsSubscribedToNewsLetter) Subscribed To Newsletter?
+        </label>
+    </div>
+
+    @Html.HiddenFor(c => c.Customer.Id)
+    @Html.AntiForgeryToken();
+
+    <button type="submit" class="btn btn-primary">SAVE</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
