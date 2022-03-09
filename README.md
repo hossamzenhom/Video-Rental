@@ -1,8 +1,8 @@
 # Video-Rental
-## ASP.Net - MVC - CRUD Opereations with API
+## ASP.Net - MVC - CRUD Operations with API
 - MVC
 - API
-- Entity Framworks
+- Entity Frameworks
 - SQL Server
 - Automapper
 - DTO
