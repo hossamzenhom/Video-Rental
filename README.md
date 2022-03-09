@@ -7,3 +7,5 @@
 - Automapper
 - DTO
 - Authentication and Authorization
+- jQuery
+- Ajax
